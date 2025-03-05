@@ -19,7 +19,35 @@ const removeButton = document.createElement(`button`)
 removeButton.textContent = `Remove`
 removeButton.addEventListener(`click`,function() {
     event.stopPropagation()          // Task 4 : stopPropagation to prevent event bubbling
-        container.removeChild(card)  // Task 4 : removeChild from parent employee
+        container.removeChild(card)  // Task 4 : removeChild from parent
+})
+    // *** Task 5 ***
+    //Double Click
+card.addEventListener('dblclick', function() {
+    const nameInput = document.createElement('input');
+    const positionInput = document.createElement('input');
+    const saveButton = document.createElement('button');
+        
+    //Prepopulate inputs with existing name and positino
+    nameInput.value = employeeName.textContent;
+    positionInput.value = employeePosition.textContent;
+    saveButton.textContent = 'Save';
+        
+    //Replace static text with inputs
+    card.replaceChild(nameInput, employeeName);
+    card.replaceChild(positionInput, employeePosition);
+    card.appendChild(saveButton);
+
+    //Save button
+    saveButton.onclick = function() {
+        employeeName.textContent = nameInput.value
+        employeePosition.textContent= positionInput.value
+
+    //Revert to static text
+        card.replaceChild(employeeName, nameInput);
+        card.replaceChild(employeePosition, positionInput);
+        card.removeChild(saveButton);
+    }
 })
 
 //Appending employee card to employee container
