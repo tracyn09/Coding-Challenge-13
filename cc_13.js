@@ -17,9 +17,10 @@ employeePosition.textContent = position
 //Remove button
 const removeButton = document.createElement(`button`)
 removeButton.textContent = `Remove`
-removeButton.onclick = function () {
-    card.remove()
-}
+removeButton.addEventListener(`click`,function() {
+    event.stopPropagation()          // Task 4 : stopPropagation to prevent event bubbling
+        container.removeChild(card)  // Task 4 : removeChild from parent employee
+})
 
 //Appending employee card to employee container
 card.appendChild(employeeName)
@@ -41,6 +42,15 @@ employeeCardsArray.forEach(card=> {
     card.style.margin = `10px`
 })
 }
+
+//Task 4
+//Click Event listener to remove button is ABOVE in Task 2 under 'Remove button' header
+
+//Click Event listener to employee container
+const employeeContainer = document.getElementById('employeeContainer');
+employeeContainer.addEventListener('click', function() {
+    console.log('Employee card clicked')})
+
 
 //Test Case for Task 2
 window.onload = function() {
